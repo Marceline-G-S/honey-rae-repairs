@@ -4,28 +4,19 @@ import { getAllTickets } from "../services/ticketService/ticketService.jsx";
 export const App = () => {
   const [displayedTickets, setdisplayedTickets] = useState([]);
   const [allTickets, setAllTickets] = useState([]);
-  const [emergencyTickets, setEmergencyTickets] = useState([]);
   const [showEmergencyToggle, setShowEmergencyToggle] = useState(false)
+  
 
+  //Initial setup of state
   useEffect(() => {
-    const fetchData = async() => {
-      try {
-        const gotAllTickets = await getAllTickets();
-        setdisplayedTickets(gotAllTickets);
-        setAllTickets(gotAllTickets)
-        setEmergencyTickets(allTickets.filter((ticket) => ticket.emergency === true))
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-    fetchData();
-  }, []);
+    getAllTickets().then(ticketsArr => {setAllTickets(ticketsArr)
+    setdisplayedTickets(ticketsArr)})
+  }, [])
 
+  //Change displayed tickets based on showEmergencyToggle
   useEffect(() => {
     if (showEmergencyToggle) {
-      const emergencyTickets = allTickets.filter(
-        (ticket) => ticket.emergency === true
-      )
+      const emergencyTickets = allTickets.filter((ticket) => ticket.emergency === true)
       setdisplayedTickets(emergencyTickets)
     } else {
       setdisplayedTickets(allTickets)
