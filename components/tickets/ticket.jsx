@@ -4,6 +4,8 @@ import { getAllEmployees } from "../../services/emplyeeService.jsx"
 export const Ticket = ({ticket}) => {
   const [employees, setEmployees] = useState([])
   const [assignedEmployee, setAssignedEmplyee] = useState({})
+  const [showEmergencyToggle, setShowEmergencyToggle] = useState(false)
+  const [searchBar, setSearchBar] = useState("")
 
   useEffect(() => {
     getAllEmployees().then(setEmployees)
