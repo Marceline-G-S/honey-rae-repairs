@@ -2,6 +2,7 @@ import "./customers.css"
 import { useEffect, useState } from "react"
 import { fetchAllCustomers } from "../../services/customerService.jsx"
 import { User } from "../users/user.jsx"
+import { Link } from "react-router-dom"
 
 
 export const CustomerList = () => {
@@ -13,7 +14,10 @@ export const CustomerList = () => {
 
     return <div className="customers">
         {customers.map((user) => {
-            return <User key={user.id} user={user}/>
+            return (<Link to={`/customers/${user.id}`}>
+                <User key={user.id} user={user} />
+            </Link>
+            )
         })}
     </div>
 }
