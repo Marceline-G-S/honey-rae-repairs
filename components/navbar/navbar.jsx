@@ -10,6 +10,7 @@ export const NavBar = () => {
         <li className="navbar-item"><Link to='employees'>Employees</Link></li>
         <li className="navbar-item"><Link to='customers'>Customers</Link></li>
         {/**This section below loads log out option of navbar if logged in. */}
+        <li className="navbar-item"><Link to="/profile">Profiles</Link></li>
         {localStorage.getItem("honey_user") ? (<li className="navbar-item navbar-logout">
         <Link className="navbar-link" to=""
         onClick={() => {
