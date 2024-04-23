@@ -9,15 +9,18 @@ import { EmployeesList } from "../../components/employees/employeesList.jsx"
 import { useEffect, useState } from "react"
 import { EmployeeForm } from "../../components/forms/EmployeeForm.jsx"
 
-
 export const ApplicationViews = () => {
   const [currentUser, setCurrentUser] = useState({})
 
   useEffect(()=>{
+    setCurrentUser(getAndSetUser())
+  },[])
+
+  const getAndSetUser = () => {
     const localHoneyUser = localStorage.getItem("honey_user")
     const honeyUserObject = JSON.parse(localHoneyUser)
-    setCurrentUser(honeyUserObject)
-  },[])
+    return honeyUserObject
+  }
 
   return <>
     <Routes>
@@ -34,7 +37,7 @@ export const ApplicationViews = () => {
           <Route index element={<CustomerList/>} />
           <Route path=":customerId" element={<CustomerDetails/>}/>
         </Route>
-        <Route path="profile" element= {<EmployeeForm currentUser={currentUser}/>}/>
+        <Route path="profile" element= {<EmployeeForm getAndSetUser={getAndSetUser} currentUser={currentUser}/>}/>
       </Route>
     </Routes>
   </>
